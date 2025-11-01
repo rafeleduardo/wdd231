@@ -1,0 +1,78 @@
+﻿@media (min-width: 768px) {
+    header {
+        padding: 1rem 2rem;
+    }
+
+    header img {
+        width: 96px;
+        height: 96px;
+    }
+
+    .site-name {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.75rem;
+    }
+
+    #menu {
+        display: none;
+    }
+
+    nav {
+        width: 100%;
+        background: var(--primary-variant);
+    }
+    nav ul {
+        display: flex;
+        gap: 0;
+        list-style:none;
+        margin:0;
+        padding:0;
+    }
+    nav li { margin-right: 1rem }
+    nav a {
+        padding: .75rem 1rem;
+        color: var(--surface);
+        text-decoration: none;
+        background: transparent;
+    }
+
+    .about-me {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1rem;
+        align-items: start;
+    }
+
+    .course-list-section {
+        width: 100%;
+        background: transparent;
+        padding: 1rem 0;
+    }
+
+    .course-list-section>.filter-controls {
+        margin: 1rem auto 1rem;
+        display: flex;
+        justify-content: center;
+        padding: 0 1rem;
+    }
+
+    .course-list-section .cards {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        padding: 0 1rem;
+        grid-auto-rows: auto;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 80px;
+    }
+
+    footer {
+        padding: 1.5rem;
+    }
+}

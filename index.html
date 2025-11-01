@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WDD 231 - Web Frontend Development I</title>
+    <meta name="description" content="WDD 231 - Web Frontend Development I course assignment portal.">
+    <meta name="author" content="Rafael Parra">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" fetchpriority="high" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;600&display=swap" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/small.css">
+    <link rel="stylesheet" href="styles/large.css">
+    <script src="scripts/date.js" defer></script>
+    <script src="scripts/navigation.js" defer></script>
+    <script src="scripts/courses.js" defer></script>
+</head>
+<body>
+<header>
+    <img src="images/logo.svg" alt="Site Logo">
+    <span class="site-name">Rafael Parra</span>
+    <button id="menu" aria-label="Toggle Navigation" aria-controls="primary-navigation" aria-expanded="false"></button>
+</header>
+
+<nav aria-label="Main navigation">
+    <ul id="primary-navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="chamber/index.html">Chamber</a></li>
+        <li><a href="final/index.html">Final</a></li>
+    </ul>
+</nav>
+
+<main>
+    <h1>Home</h1>
+    <div class="about-me">
+        <section class="about-box">
+            <h2>About Me</h2>
+            <p>
+                I'm a passionate student of Computer Systems Engineering who absolutely loves programming. I get excited
+                by solving problems with code and building things that people can use.
+            </p>
+            <p>
+                Right now I'm focused on learning new languages and tools — every week I try a new challenge, explore
+                a different framework, and build small projects to practice. I enjoy experimenting with front‑end
+                interfaces, scripting, and the logic that makes applications come alive.
+            </p>
+            <p>
+                I love collaborating, sharing ideas, and growing as a developer. I'm curious, eager, and ready to learn
+                more every day — that energy keeps me moving forward as a student and as a programmer.
+            </p>
+        </section>
+        <section class="photo-box">
+            <h2>Student Photo</h2>
+            <picture>
+                <source type="image/webp"
+                        srcset="images/student-360.webp 360w, images/student-320.webp 320w, images/student-160.webp 160w">
+                <img fetchpriority="high" src="images/student-360.webp"
+                     srcset="images/student-360.webp 360w, images/student-320.webp 320w, images/student-160.webp 160w"
+                     sizes="(max-width:599px) 160px, 360px"
+                     alt="Student photo"
+                     width="360" height="463" decoding="async"
+                     class="student-photo-img">
+            </picture>
+        </section>
+    </div>
+
+    <section class="course-list-section">
+        <h2>Web Certificate Courses</h2>
+
+        <div class="filter-controls">
+            <button id="filter-all">All</button>
+            <button id="filter-cse">CSE</button>
+            <button id="filter-wdd">WDD</button>
+        </div>
+
+        <div id="course-cards-container" class="cards">
+        </div>
+
+        <p class="credit-total">The total credits for course listed above is <span id="total-credits">0</span></p>
+    </section>
+
+</main>
+
+<footer>
+    <div class="social-links">
+        <a href="https://github.com/rafeleduardo" target="_blank">
+            <img src="images/github-mark-white.svg" alt="GitHub">
+        </a>
+        <a href="https://www.linkedin.com/in/rafeleduardo" target="_blank">
+            <img src="images/InBug-White.webp" alt="LinkedIn">
+        </a>
+    </div>
+
+    <p class="copyright-info">
+        &copy; <span id="currentyear"></span> | Rafael Parra | Venezuela
+    </p>
+
+    <p class="last-modified">
+        Last Modified: <span id="lastModified"></span>
+    </p>
+</footer>
+
+</body>
+</html>
