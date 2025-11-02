@@ -36,6 +36,11 @@
         background: transparent;
     }
 
+    nav a.active {
+        background: var(--primary);
+        color: var(--surface);
+    }
+
     .about-me {
         display: grid;
         grid-template-columns: 2fr 1fr;

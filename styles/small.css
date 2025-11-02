@@ -107,6 +107,11 @@ nav a:hover, nav a:focus {
     background: rgba(255, 255, 255, 0.06)
 }
 
+nav a.active {
+    background: var(--primary);
+    color: var(--surface);
+}
+
 main h1 {
     margin-bottom: 0.5rem;
 }
