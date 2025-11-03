@@ -3,13 +3,16 @@
     const navLinks = document.querySelectorAll('#primary-navigation a');
 
     navLinks.forEach(link => {
-        const linkHref = link.getAttribute('href');
-        let normalizedLinkPath = linkHref.startsWith('/') ? linkHref : '/' + linkHref;
-        let normalizedCurrentPath = currentPath.startsWith('/') ? currentPath : '/' + currentPath;
+        const linkPath = new URL(link.href).pathname;
 
-        if (normalizedCurrentPath === '/' && normalizedLinkPath === '/index.html') {
-            link.classList.add('active');
-        } else if (normalizedCurrentPath.includes(normalizedLinkPath) && normalizedLinkPath !== '/') {
+        const normalizedCurrentPath = currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
+        const normalizedLinkPath = linkPath.endsWith('/') ? linkPath.slice(0, -1) : linkPath;
+
+        if ((normalizedLinkPath.endsWith('/index.html') || normalizedLinkPath === '') && (normalizedCurrentPath === '' || normalizedCurrentPath.endsWith('/wdd231'))) {
+            if (link.textContent === 'Home') {
+                link.classList.add('active');
+            }
+        } else if (normalizedCurrentPath.includes(normalizedLinkPath) && !normalizedLinkPath.endsWith('/index.html')) {
             link.classList.add('active');
         }
     });
