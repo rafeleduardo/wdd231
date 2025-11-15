@@ -28,7 +28,10 @@
             const img = document.createElement('img');
             img.src = `images/${src}`;
             img.alt = alt || '';
-            img.loading = 'lazy';
+            img.loading = opts.loading || 'lazy';
+            if(opts.fetchpriority){
+                try{ img.setAttribute('fetchpriority', opts.fetchpriority); }catch(e){}
+            }
             img.width = opts.w;
             img.height = opts.h;
             img.style.objectFit = 'contain';
@@ -40,6 +43,8 @@
                 const h = opts.h || 32;
                 const p1 = placehold(w,h);
                 const p2 = placehold(w*2,h*2);
+                try{ img.setAttribute('fetchpriority','high'); }catch(e){}
+                img.loading = 'eager';
                 img.src = p1;
                 img.srcset = `${p1} 1x, ${p2} 2x`;
             });
@@ -48,13 +53,35 @@
         };
     }
 
-    function createCard(member){
+    function createCard(member, isFirst=false){
         const div = document.createElement('article');
         div.className = 'member-card';
 
         const media = document.createElement('div');
         media.className = 'card-media';
-        const img = makeImage(member.image, member.name)({w:600,h:350});
+        const imgOpts = {w:600,h:350};
+        if(isFirst){
+            imgOpts.loading = 'eager';
+            imgOpts.fetchpriority = 'high';
+
+            try{
+                const preloadUrl = `images/${member.image}`;
+                if(!document.querySelector(`link[rel="preload"][href="${preloadUrl}"]`)){
+                    const l = document.createElement('link');
+                    l.rel = 'preload'; l.as = 'image'; l.href = preloadUrl;
+                    document.head.appendChild(l);
+                }
+                const p1 = `https://placehold.co/${imgOpts.w}x${imgOpts.h}/0A5873/FFFFFF?text=Logo`;
+                const p2 = `https://placehold.co/${imgOpts.w*2}x${imgOpts.h*2}/0A5873/FFFFFF?text=Logo`;
+                if(!document.querySelector(`link[rel="preload"][href="${p1}"]`)){
+                    const lp1 = document.createElement('link'); lp1.rel='preload'; lp1.as='image'; lp1.href=p1; document.head.appendChild(lp1);
+                }
+                if(!document.querySelector(`link[rel="preload"][href="${p2}"]`)){
+                    const lp2 = document.createElement('link'); lp2.rel='preload'; lp2.as='image'; lp2.href=p2; document.head.appendChild(lp2);
+                }
+            }catch(e){/* silent */}
+        }
+        const img = makeImage(member.image, member.name)(imgOpts);
         media.appendChild(img);
 
         const body = document.createElement('div');
@@ -91,13 +118,20 @@
         return div;
     }
 
-    function createListItem(member){
+    function createListItem(member, isFirst=false){
         const wrapper = document.createElement('div');
         wrapper.className = 'member-list-item';
 
         const media = document.createElement('div');
         media.className = 'list-media';
-        const img = makeImage(member.image, member.name)({w:64,h:64});
+        const imgOpts = {w:64,h:64};
+        if(isFirst){ imgOpts.loading='eager'; imgOpts.fetchpriority='high';
+            const preloadUrl = `images/${member.image}`;
+            if(!document.querySelector(`link[rel="preload"][href="${preloadUrl}"]`)){
+                const l = document.createElement('link'); l.rel='preload'; l.as='image'; l.href=preloadUrl; document.head.appendChild(l);
+            }
+        }
+        const img = makeImage(member.image, member.name)(imgOpts);
         media.appendChild(img);
 
         const body = document.createElement('div');
@@ -132,20 +166,26 @@
     }
 
     function render(filtered){
-        listingsEl.innerHTML = '';
+        const frag = document.createDocumentFragment();
         if(currentView === 'cards'){
-            listingsEl.className = 'directory-cards';
             const grid = document.createElement('div');
             grid.className = 'cards-grid';
-            filtered.forEach(m => grid.appendChild(createCard(m)));
-            listingsEl.appendChild(grid);
+            filtered.forEach((m,i) => grid.appendChild(createCard(m, i===0)));
+            frag.appendChild(grid);
         } else {
-            listingsEl.className = 'directory-list';
             const list = document.createElement('div');
             list.className = 'list-wrap';
-            filtered.forEach(m => list.appendChild(createListItem(m)));
-            listingsEl.appendChild(list);
+            filtered.forEach((m,i) => list.appendChild(createListItem(m, i===0)));
+            frag.appendChild(list);
         }
+
+        listingsEl.innerHTML = '';
+        listingsEl.appendChild(frag);
+
+        listingsEl.classList.remove('loading');
+        listingsEl.removeAttribute('aria-busy');
+        listingsEl.classList.remove('directory-cards','directory-list');
+        listingsEl.classList.add(currentView === 'cards' ? 'directory-cards' : 'directory-list');
     }
 
     function applySearch(){

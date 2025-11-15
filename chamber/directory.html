@@ -17,11 +17,17 @@
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <!-- Google Fonts: Inter -->
+    <!-- Preconnect & preload Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap">
-    <link rel="stylesheet" href="styles/chamber.css">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" onload="this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet"></noscript>
+
+    <link rel="preload" as="style" href="styles/chamber.css" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles/chamber.css"></noscript>
+
+    <link rel="preload" fetchpriority=high as="image" href="https://placehold.co/600x350/0A5873/FFFFFF?text=Logo">
+    <link rel="preload" fetchpriority=high as="image" href="https://placehold.co/1200x700/0A5873/FFFFFF?text=Logo">
 </head>
 <body>
 
@@ -30,7 +36,7 @@
         <div class="header-container">
             <div class="brand-left">
                 <a href="../index.html" class="brand-link" aria-label="Home">
-                    <img class="logo" src="images/chamber-logo.webp" alt="Chamber logo">
+                    <img class="logo" src="images/chamber-logo.webp" alt="Chamber logo" width="56" height="56">
                 </a>
                 <div class="brand-text">
                     <h1 class="site-title">Harborview Chamber of Commerce</h1>
@@ -78,7 +84,7 @@
         </div>
     </section>
 
-    <section id="directory-listings" class="directory-cards" aria-live="polite"></section>
+    <section id="directory-listings" class="directory-cards loading" aria-live="polite" aria-busy="true"></section>
 </main>
 
 <footer>
@@ -96,9 +102,9 @@
         <div class="footer-col footer-social">
             <h4>Follow us</h4>
             <div class="social-icons">
-                <a href="#" aria-label="YouTube"><span class="social-icon"><img src="images/yt_icon_red_digital.png" alt="YouTube"></span></a>
-                <a href="#" aria-label="X"><span class="social-icon"><img src="images/logo-x-white.png" alt="X"></span></a>
-                <a href="#" aria-label="LinkedIn"><span class="social-icon"><img src="images/inbug-white.webp" alt="LinkedIn"></span></a>
+                <a href="#" aria-label="YouTube"><span class="social-icon"><img src="images/yt_icon_red_digital.webp" alt="YouTube" width="32" height="32"></span></a>
+                <a href="#" aria-label="X"><span class="social-icon"><img src="images/logo-x-white.webp" alt="X" width="32" height="32"></span></a>
+                <a href="#" aria-label="LinkedIn"><span class="social-icon"><img src="images/inbug-white.webp" alt="LinkedIn" width="32" height="32"></span></a>
             </div>
         </div>
 
