@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chamber - Directory</title>
+    <meta name="description" content="Directory - Chamber of Commerce">
+    <meta name="author" content="Rafael Parra">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Chamber - Directory">
+    <meta property="og:description" content="Directory of Chamber members and local businesses.">
+    <meta property="og:image" content="https://your-github-username.github.io/wdd231/chamber/images/chamber-logo.png">
+    <meta property="og:url" content="https://your-github-username.github.io/wdd231/chamber/directory.html">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts: Inter (moderna, sobria) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/chamber.css">
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <div class="header-container">
+            <div class="brand-left">
+                <a href="../index.html" class="brand-link" aria-label="Home">
+                    <img class="logo" src="images/chamber-logo.png" alt="Chamber logo">
+                </a>
+                <div class="brand-text">
+                    <h1 class="site-title">Chamber of Commerce</h1>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-group">
+                <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="hamburger" aria-hidden="true"></span>
+                </button>
+
+                <nav id="primary-navigation" class="main-nav" aria-label="Primary navigation">
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./discover.html">Discover</a></li>
+                        <li><a href="./directory.html" class="active">Business Directory</a></li>
+                        <li><a href="./join.html">Join</a></li>
+                    </ul>
+                    <div class="nav-underline" aria-hidden="true"></div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="directory-controls" aria-label="Directory controls">
+        <div class="controls-inner">
+            <div class="view-toggle" role="tablist" aria-label="View toggle">
+                <button id="view-cards" class="btn btn-toggle active" aria-pressed="true" aria-label="Cards view">Cards</button>
+                <button id="view-list" class="btn btn-toggle" aria-pressed="false" aria-label="List view">List</button>
+            </div>
+            <div class="directory-search">
+                <input id="directory-search" type="search" placeholder="Search members by name or category" aria-label="Search directory">
+            </div>
+        </div>
+    </section>
+
+    <section id="directory-listings" class="directory-cards" aria-live="polite"></section>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-col footer-org">
+            <strong>Chamber of Commerce</strong>
+            <address>
+                123 Main Street<br>
+                Anytown, ST 12345<br>
+                <a href="mailto:info@example.com">info@example.com</a><br>
+                <a href="tel:+1234567890">+1 (234) 567-890</a>
+            </address>
+        </div>
+
+        <div class="footer-col footer-social">
+            <h4>Follow us</h4>
+            <div class="social-icons">
+                <a href="#" aria-label="YouTube"><span class="social-icon"><img src="images/yt_icon_red_digital.png" alt="YouTube"></span></a>
+                <a href="#" aria-label="X"><span class="social-icon"><img src="images/logo-x-white.png" alt="X"></span></a>
+                <a href="#" aria-label="LinkedIn"><span class="social-icon"><img src="images/inbug-white.webp" alt="LinkedIn"></span></a>
+            </div>
+        </div>
+
+        <div class="footer-col footer-meta">
+            <p class="muted">WDD231 Class Project</p>
+            <p class="muted">Rafael Parra</p>
+            <p class="muted">&copy; Chamber of Commerce <span id="currentyear"></span></p>
+            <p class="muted">Last modified: <span id="lastModified"></span></p>
+        </div>
+    </div>
+</footer>
+
+<script src="scripts/navigation.js" defer></script>
+<script src="../scripts/date.js" defer></script>
+<script src="scripts/directory.js" defer></script>
+</body>
+</html>
