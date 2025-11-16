@@ -198,17 +198,48 @@
         ));
     }
 
-    btnCards.addEventListener('click', ()=>{
-        currentView = 'cards';
-        btnCards.classList.add('active'); btnCards.setAttribute('aria-pressed','true');
-        btnList.classList.remove('active'); btnList.setAttribute('aria-pressed','false');
+    function activateTab(tab){
+        const isCards = tab === btnCards;
+        currentView = isCards ? 'cards' : 'list';
+
+        btnCards.classList.toggle('active', isCards);
+        btnList.classList.toggle('active', !isCards);
+
+        btnCards.setAttribute('aria-selected', isCards ? 'true' : 'false');
+        btnList.setAttribute('aria-selected', isCards ? 'false' : 'true');
+        btnCards.setAttribute('tabindex', isCards ? '0' : '-1');
+        btnList.setAttribute('tabindex', isCards ? '-1' : '0');
+        tab.focus();
         render(applySearch());
-    });
-    btnList.addEventListener('click', ()=>{
-        currentView = 'list';
-        btnList.classList.add('active'); btnList.setAttribute('aria-pressed','true');
-        btnCards.classList.remove('active'); btnCards.setAttribute('aria-pressed','false');
-        render(applySearch());
+    }
+
+    btnCards.addEventListener('click', ()=> activateTab(btnCards));
+    btnList.addEventListener('click', ()=> activateTab(btnList));
+
+    const viewToggle = document.querySelector('.view-toggle');
+    viewToggle.addEventListener('keydown', (e)=>{
+        const keys = ['ArrowLeft','ArrowRight','Home','End','Enter',' '];
+        if(!keys.includes(e.key)) return;
+        const tabs = [btnCards, btnList];
+        const currentIndex = tabs.indexOf(document.activeElement);
+        let newIndex = -1;
+        if(e.key === 'ArrowLeft') newIndex = (currentIndex <= 0) ? tabs.length - 1 : currentIndex - 1;
+        if(e.key === 'ArrowRight') newIndex = (currentIndex === tabs.length - 1) ? 0 : currentIndex + 1;
+        if(e.key === 'Home') newIndex = 0;
+        if(e.key === 'End') newIndex = tabs.length - 1;
+        if(e.key === 'Enter' || e.key === ' ') {
+            const focused = document.activeElement;
+            if(tabs.includes(focused)){
+                e.preventDefault();
+                activateTab(focused);
+            }
+            return;
+        }
+        if(newIndex >= 0){
+            e.preventDefault();
+            const target = tabs[newIndex];
+            target.focus();
+        }
     });
 
     searchInput.addEventListener('input', ()=>{

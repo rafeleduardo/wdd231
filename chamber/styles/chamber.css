@@ -32,6 +32,13 @@ header {
     background: var(--color-primary);
     color: #fff;
     padding: 0.5rem 0;
+    left: 0;
+    right: 0;
+}
+
+header, footer {
+    width: 100%;
+    box-sizing: border-box;
 }
 
 footer {
@@ -117,13 +124,11 @@ nav a {
 }
 
 /* Navigation styles */
-.header-inner {
-    display: flex;
+.header-inner {display: flex;
     align-items: center;
     gap: 1rem;
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 1rem 1rem;
+    width: 100%;
+    padding: 0.6rem 0;
     justify-content: flex-start;
 }
 
@@ -140,6 +145,11 @@ nav a {
     justify-content: space-between;
     gap: 1rem;
     padding: 0 1rem;
+}
+
+footer {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .nav-toggle {
@@ -263,10 +273,19 @@ nav a {
 
 /* Main content area */
 main {
-    max-width: var(--container-width);
-    margin: 1.25rem auto 0;
+    width: min(100%, var(--container-width));
+    margin-inline: auto;
+    margin-top: 1.25rem;
     padding: 0 1rem;
     flex: 1 0 auto;
+}
+
+main > * {
+    width: 100%;
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
 }
 
 /* Directory controls */
@@ -353,10 +372,18 @@ main {
     box-shadow: var(--shadow-1);
 }
 
-#directory-listings, .directory-cards, .directory-list {
-    width: var(--container-width);
+#directory-listings {
+    width: min(100%, var(--container-width));
+    max-width: var(--container-width);
     margin: 0.75rem auto;
     padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.directory-cards, .directory-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -367,18 +394,37 @@ main {
     animation: skeleton-shimmer 1.2s linear infinite;
 }
 
-@keyframes skeleton-shimmer {
-    from { background-position: 200% 0; }
-    to { background-position: -200% 0; }
+/* Reduce reserved height on smaller screens so content doesn't overflow vertically */
+@media (max-width: 600px) {
+    .directory-cards.loading, .directory-list.loading {
+        min-height: 260px;
+    }
 }
 
 /* Cards grid */
 .cards-grid {
     display: grid;
-    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
+    /* larger min gives more substantial cards by default */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0.9rem;
     align-items: start;
     width: 100%;
+}
+
+.cards-grid > * {
+    min-width: 0;
+}
+
+.member-card, .member-card * {
+    min-width: 0;
+}
+
+.member-card .member-links a,
+.member-card .member-desc,
+.member-list-item .list-body p,
+.member-list-item .list-body h3 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .member-card {
@@ -408,12 +454,31 @@ main {
 }
 
 .member-card .card-body {
-    padding: 0.75rem
+    padding: 1rem
 }
 
 .member-card h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1.05rem
+    margin: 0 0 0.35rem 0;
+    font-size: 1.125rem;
+}
+
+@media (min-width: 1100px) {
+    .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    .member-card .card-media {
+        height: 220px;
+    }
+
+    .member-card .card-body {
+        padding: 1.125rem;
+    }
+
+    .member-card h3 {
+        font-size: 1.25rem;
+    }
 }
 
 .member-card .member-category {
@@ -428,8 +493,18 @@ main {
 }
 
 .member-card .member-links a {
-    color: var(--color-primary-600);
-    text-decoration: none
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.member-card .member-links a:hover,
+.member-card .member-links a:focus {
+    text-decoration: underline;
+}
+
+.member-card .member-links a:focus-visible {
+    outline: 3px solid rgba(37, 165, 224, 0.18);
+    outline-offset: 3px;
 }
 
 /* List view */
@@ -488,7 +563,7 @@ main {
     }
 
     .cards-grid {
-        grid-template-columns:repeat(auto-fill, minmax(220px, 1fr))
+        grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
     }
 }
 
@@ -571,11 +646,18 @@ main {
 }
 
 .muted {
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0.15rem 0
+    color: var(--color-muted);
+    margin: 0.15rem 0;
 }
 
-/* Footer links and social icons color */
+footer .muted, footer .muted a {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.directory-subtitle.muted {
+    color: var(--color-text);
+}
+
 .footer-col a {
     color: rgba(255, 255, 255, 0.95);
     text-decoration: underline
