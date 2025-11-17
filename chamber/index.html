@@ -47,9 +47,9 @@
                 <nav id="primary-navigation" class="main-nav" aria-label="Primary navigation">
                     <ul>
                         <li><a href="./index.html" class="active">Home</a></li>
-                        <li><a href="./discover.html">Discover</a></li>
+                        <li><a href="#">Discover</a></li>
                         <li><a href="./directory.html">Business Directory</a></li>
-                        <li><a href="./join.html">Join</a></li>
+                        <li><a href="#">Join</a></li>
                     </ul>
                     <div class="nav-underline" aria-hidden="true"></div>
                 </nav>
@@ -60,47 +60,47 @@
 
 <main>
     <section class="home-hero">
-        <div class="hero-inner" style="max-width:var(--container-width);margin:0.5rem auto;padding:0 1rem;">
-            <div class="hero-media" style="margin-bottom:1rem;">
-                <img src="https://placehold.co/1200x500/0A5873/FFFFFF?text=Harborview+Chamber+Hero" alt="Harborview Chamber hero image" style="width:100%;height:auto;display:block;" fetchpriority="high">
+        <div class="hero-inner">
+            <div class="hero-media">
+                <img src="https://placehold.co/1200x500/0A5873/FFFFFF?text=Harborview+Chamber+Hero" alt="Harborview Chamber hero image" fetchpriority="high">
             </div>
-            <div class="hero-content" style="display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+            <div class="hero-content">
                 <div>
-                    <h2 style="margin:0 0 .5rem 0;">Supporting local businesses and community growth</h2>
-                    <p class="muted" style="margin:0 0 .75rem 0;">Events, resources, and a trusted directory to help your business thrive.</p>
+                    <h2>Supporting local businesses and community growth</h2>
+                    <p class="muted">Events, resources, and a trusted directory to help your business thrive.</p>
                 </div>
-                <div style="margin-left:auto">
-                    <a class="btn" href="./join.html" role="button" aria-label="Join the Chamber">Join the Chamber</a>
+                <div class="hero-cta">
+                    <a class="btn" href="#" role="button" aria-label="Join the Chamber">Join the Chamber</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Quick sections: Events (2/4) | Current Weather (1/4) | Weather Forecast (1/4) -->
-    <section class="home-panels" style="max-width:var(--container-width);margin:1rem auto;padding:0 1rem;">
+    <section class="home-panels">
         <div class="events" aria-labelledby="events-title">
-            <div style="background:var(--color-surface);padding:0.5rem;border-radius:8px;box-shadow:var(--shadow-1);margin-bottom:0.75rem;">
-                <h3 id="events-title" style="margin:0;">Upcoming Events</h3>
+            <div class="panel-title">
+                <h3 id="events-title">Upcoming Events</h3>
             </div>
-            <div id="events-list"></div>
-        </div>
+             <div id="events-list"></div>
+         </div>
 
-        <aside class="weather" aria-labelledby="current-weather-title">
-            <div style="background:var(--color-surface);padding:0.5rem;border-radius:8px;box-shadow:var(--shadow-1);margin-bottom:0.75rem;">
-                <h4 id="current-weather-title" style="margin:0;">Current Weather</h4>
+         <aside class="weather" aria-labelledby="current-weather-title">
+            <div class="panel-title">
+                <h4 id="current-weather-title">Current Weather</h4>
             </div>
-            <div id="current-weather-box"></div>
-        </aside>
+             <div id="current-weather-box"></div>
+         </aside>
 
-        <aside class="weather-forecast" aria-labelledby="forecast-weather-title">
-            <div style="background:var(--color-surface);padding:0.5rem;border-radius:8px;box-shadow:var(--shadow-1);margin-bottom:0.75rem;">
-                <h4 id="forecast-weather-title" style="margin:0;">Weather Forecast</h4>
+         <aside class="weather-forecast" aria-labelledby="forecast-weather-title">
+            <div class="panel-title">
+                <h4 id="forecast-weather-title">Weather Forecast</h4>
             </div>
-            <div id="forecast-weather-box"></div>
-        </aside>
+             <div id="forecast-weather-box"></div>
+         </aside>
     </section>
 
-    <section class="spotlights" style="max-width:var(--container-width);margin:1rem auto;padding:0 1rem;">
+    <section class="spotlights">
         <h3>Member Spotlights</h3>
         <div id="spotlights-grid" class="cards-grid" aria-live="polite"></div>
     </section>

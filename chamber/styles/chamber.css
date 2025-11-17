@@ -82,11 +82,11 @@ nav a {
 .brand-link {
     display: inline-block;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .brand-link .logo {
     display: block;
-    cursor: pointer;
 }
 
 .brand-left {
@@ -702,21 +702,17 @@ footer .muted, footer .muted a {
     outline: none !important;
 }
 
-.brand-link {
-    cursor: default
-}
-
 .brand-link img {
-    display: block
+    display: block;
 }
 
 .brand-link:focus {
     outline: 3px solid rgba(255, 255, 255, 0.18);
-    outline-offset: 3px
+    outline-offset: 3px;
 }
 
 .brand-link:focus:not(:focus-visible) {
-    outline: none
+    outline: none;
 }
 
 @media (max-width: 768px) {
@@ -735,54 +731,55 @@ footer .muted, footer .muted a {
     }
 }
 
-.view-toggle button.btn-toggle.active,
-.view-toggle .btn-toggle.active,
-#view-cards.active, #view-list.active {
-    background: var(--color-primary) !important;
-    border-color: var(--color-primary) !important;
-    color: #fff !important;
-    box-shadow: 0 6px 14px rgba(10, 88, 115, 0.08) !important;
+/* === Panels: single clean mobile-first definition === */
+/* Title band: small stripe at the top of each panel */
+.home-panels .panel-title {
+    background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-highlight) 100%);
+    color: #fff;
+    padding: 0.65rem 1rem;
+    box-sizing: border-box;
 }
 
-.home-hero .hero-media img {
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(2, 6, 23, 0.08);
-}
-
+/* Panels container (mobile-first: stacked) */
 .home-panels {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 1rem;
+    max-width: var(--container-width);
+    margin: 1rem auto;
+    padding: 0 1rem;
 }
 
+/* Each panel is a white card whose header is the colored band */
 .home-panels > * {
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 0.5rem;
+    background: var(--color-surface);
+    border-radius: 10px;
+    box-shadow: var(--shadow-1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Panel body padding - corrected selectors */
+.home-panels > .events > #events-list,
+.home-panels > .weather > #current-weather-box,
+.home-panels > .weather-forecast > #forecast-weather-box {
+    padding: 1rem;
+    background: transparent;
+}
+
+/* Medium screens: two-column layout; events occupy full width (top row) */
 @media (min-width: 800px) {
     .home-panels {
-        display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        align-items: start;
     }
 
     .home-panels .events {
-        grid-column: span 2;
-    }
-
-    .home-panels .weather, .home-panels .weather-forecast {
-        grid-column: auto;
-    }
-
-    .home-panels > * {
-        margin-bottom: 0;
+        grid-column: 1 / -1;
     }
 }
 
+/* Large screens: four-column layout; events span 2 columns */
 @media (min-width: 1200px) {
     .home-panels {
         grid-template-columns: repeat(4, 1fr);
@@ -793,57 +790,14 @@ footer .muted, footer .muted a {
     }
 }
 
-.home-panels .panel-title,
-.home-panels .events > div:first-child,
-.home-panels .weather > div:first-child,
-.home-panels .weather-forecast > div:first-child {
-    margin: 0 0 0.75rem 0;
-}
-
-.home-panels > .events,
-.home-panels > .weather,
-.home-panels > .weather-forecast {
-    background: var(--color-surface);
-    border-radius: 10px;
-    box-shadow: var(--shadow-1);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.home-panels > .events > div:first-child,
-.home-panels > .weather > div:first-child,
-.home-panels > .weather-forecast > div:first-child {
-    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-600) 100%) !important;
-    color: #fff !important;
-    padding: 0.9rem 1rem !important;
-}
-
-/* Panel body area */
-.home-panels > .events #events-list,
-.home-panels > .weather #current-weather-box,
-.home-panels > .weather-forecast #forecast-weather-box {
-    padding: 1rem;
-}
-
-.home-panels .event-item {
-    margin-bottom: 0.5rem;
-}
-
-.home-panels > .events > div:first-child h3,
-.home-panels > .weather > div:first-child h4,
-.home-panels > .weather-forecast > div:first-child h4 {
+/* Keep headings inside band tidy */
+.home-panels .panel-title h3,
+.home-panels .panel-title h4 {
     margin: 0;
-    color: inherit;
 }
 
-@media (min-width: 1100px) {
-    .home-panels > .events > div:first-child h3 {
-        font-size: 1.125rem;
-    }
-
-    .home-panels > .weather > div:first-child h4,
-    .home-panels > .weather-forecast > div:first-child h4 {
-        font-size: 1rem;
-    }
+.home-panels .panel-title {
+    flex: 0 0 auto !important;
 }
+
+/* End panels clean block */
