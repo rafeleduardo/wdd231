@@ -81,11 +81,12 @@ nav a {
 /* Brand link and site title styles */
 .brand-link {
     display: inline-block;
-    text-decoration: none
+    text-decoration: none;
 }
 
 .brand-link .logo {
-    display: block
+    display: block;
+    cursor: pointer;
 }
 
 .brand-left {
@@ -124,7 +125,8 @@ nav a {
 }
 
 /* Navigation styles */
-.header-inner {display: flex;
+.header-inner {
+    display: flex;
     align-items: center;
     gap: 1rem;
     width: 100%;
@@ -389,12 +391,11 @@ main > * {
 
 .directory-cards.loading, .directory-list.loading {
     min-height: 420px;
-    background: linear-gradient(90deg, rgba(15,23,42,0.02) 25%, rgba(15,23,42,0.03) 50%, rgba(15,23,42,0.02) 75%);
+    background: linear-gradient(90deg, rgba(15, 23, 42, 0.02) 25%, rgba(15, 23, 42, 0.03) 50%, rgba(15, 23, 42, 0.02) 75%);
     background-size: 200% 100%;
     animation: skeleton-shimmer 1.2s linear infinite;
 }
 
-/* Reduce reserved height on smaller screens so content doesn't overflow vertically */
 @media (max-width: 600px) {
     .directory-cards.loading, .directory-list.loading {
         min-height: 260px;
@@ -404,7 +405,6 @@ main > * {
 /* Cards grid */
 .cards-grid {
     display: grid;
-    /* larger min gives more substantial cards by default */
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 0.9rem;
     align-items: start;
@@ -742,4 +742,108 @@ footer .muted, footer .muted a {
     border-color: var(--color-primary) !important;
     color: #fff !important;
     box-shadow: 0 6px 14px rgba(10, 88, 115, 0.08) !important;
+}
+
+.home-hero .hero-media img {
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(2, 6, 23, 0.08);
+}
+
+.home-panels {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 1rem;
+}
+
+.home-panels > * {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 800px) {
+    .home-panels {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        align-items: start;
+    }
+
+    .home-panels .events {
+        grid-column: span 2;
+    }
+
+    .home-panels .weather, .home-panels .weather-forecast {
+        grid-column: auto;
+    }
+
+    .home-panels > * {
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 1200px) {
+    .home-panels {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .home-panels .events {
+        grid-column: span 2;
+    }
+}
+
+.home-panels .panel-title,
+.home-panels .events > div:first-child,
+.home-panels .weather > div:first-child,
+.home-panels .weather-forecast > div:first-child {
+    margin: 0 0 0.75rem 0;
+}
+
+.home-panels > .events,
+.home-panels > .weather,
+.home-panels > .weather-forecast {
+    background: var(--color-surface);
+    border-radius: 10px;
+    box-shadow: var(--shadow-1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-panels > .events > div:first-child,
+.home-panels > .weather > div:first-child,
+.home-panels > .weather-forecast > div:first-child {
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-600) 100%) !important;
+    color: #fff !important;
+    padding: 0.9rem 1rem !important;
+}
+
+/* Panel body area */
+.home-panels > .events #events-list,
+.home-panels > .weather #current-weather-box,
+.home-panels > .weather-forecast #forecast-weather-box {
+    padding: 1rem;
+}
+
+.home-panels .event-item {
+    margin-bottom: 0.5rem;
+}
+
+.home-panels > .events > div:first-child h3,
+.home-panels > .weather > div:first-child h4,
+.home-panels > .weather-forecast > div:first-child h4 {
+    margin: 0;
+    color: inherit;
+}
+
+@media (min-width: 1100px) {
+    .home-panels > .events > div:first-child h3 {
+        font-size: 1.125rem;
+    }
+
+    .home-panels > .weather > div:first-child h4,
+    .home-panels > .weather-forecast > div:first-child h4 {
+        font-size: 1rem;
+    }
 }
