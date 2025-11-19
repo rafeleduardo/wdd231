@@ -183,8 +183,29 @@
 
     const gold = members.filter(m=>m.membership_level===3);
     const silver = members.filter(m=>m.membership_level===2);
-    const rest = members.filter(m=>m.membership_level!==3 && m.membership_level!==2);
-    const pick = [...gold, ...silver, ...rest].slice(0,3);
+    const pool = [...gold, ...silver];
+
+    function shuffleArray(arr){
+        const a = arr.slice();
+        for(let i=a.length-1;i>0;i--){
+            const j = Math.floor(Math.random()*(i+1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
+    const shuffled = shuffleArray(pool);
+    let pick = shuffled.slice(0,3);
+
+    if(pick.length < 3){
+        const others = members.filter(m=>m.membership_level!==3 && m.membership_level!==2 && !pick.includes(m));
+        for(const o of others){
+            if(pick.length>=3) break;
+            pick.push(o);
+        }
+    }
+
+    pick = pick.filter((v,i,self)=>self.indexOf(v)===i).slice(0,3);
 
     spotlightsEl.innerHTML = '';
     pick.forEach((m,i)=>{
