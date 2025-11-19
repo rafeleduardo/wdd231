@@ -750,7 +750,6 @@ footer .muted, footer .muted a {
     padding: 0 1rem;
 }
 
-/* Each panel is a white card whose header is the colored band */
 .home-panels > * {
     background: var(--color-surface);
     border-radius: 10px;
@@ -760,12 +759,27 @@ footer .muted, footer .muted a {
     flex-direction: column;
 }
 
-/* Panel body padding - corrected selectors */
 .home-panels > .events > #events-list,
 .home-panels > .weather > #current-weather-box,
 .home-panels > .weather-forecast > #forecast-weather-box {
     padding: 1rem;
-    background: transparent;
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.home-panels > .events > #events-list .muted,
+.home-panels > .weather > #current-weather-box .muted,
+.home-panels > .weather-forecast > #forecast-weather-box .muted {
+    color: rgba(255,255,255,0.9);
+}
+
+.home-panels > .events > #events-list a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.home-panels img[src*="openweathermap.org/img/wn/"] {
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
 }
 
 /* Medium screens: two-column layout; events occupy full width (top row) */
@@ -801,3 +815,16 @@ footer .muted, footer .muted a {
 }
 
 /* End panels clean block */
+
+.home-panels > .weather-forecast > #forecast-weather-box > div > div {
+    background: transparent !important;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    padding: 0.5rem !important;
+    border-radius: 6px !important;
+}
+
+.home-panels > .weather-forecast > #forecast-weather-box > div > div:hover {
+    box-shadow: 0 6px 14px rgba(2,6,23,0.12);
+    transform: translateY(-2px);
+}
