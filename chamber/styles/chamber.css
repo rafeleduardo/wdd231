@@ -46,13 +46,10 @@ footer {
     color: #fff;
     padding: 1.25rem 0;
     margin-top: 0;
-}
-
-footer {
     width: 100%;
     box-sizing: border-box;
     position: relative;
-    left: 0
+    left: 0;
 }
 
 header img.logo {
@@ -576,10 +573,7 @@ main > * {
     gap: 2rem;
     align-items: flex-start;
     padding: 0 1rem;
-}
-
-.footer-inner {
-    background: transparent
+    background: transparent;
 }
 
 .footer-col {
@@ -896,4 +890,92 @@ footer .muted, footer .muted a {
     .home-hero .hero-media img {
         height: auto;
     }
+}
+
+#current-weather-box .cw-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-top: 0.5rem;
+}
+
+#current-weather-box .cw-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 140px;
+    flex: 1 1 140px;
+}
+
+#current-weather-box .cw-item .muted {
+    color: rgba(255,255,255,0.9);
+}
+
+#current-weather-box .cw-main {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#current-weather-box .cw-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin-right: 8px;
+}
+
+#current-weather-box .cw-temp {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+#current-weather-box .cw-desc {
+    margin: 0;
+}
+
+#current-weather-box .cw-value {
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    #current-weather-box .cw-item {
+        min-width: 120px;
+        flex: 1 1 120px;
+    }
+}
+
+/* Forecast list and item styles (used by scripts/renderSimple3Day) */
+.home-panels > .weather-forecast > #forecast-weather-box .forecast-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+
+.home-panels > .weather-forecast > #forecast-weather-box .forecast-item {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.home-panels > .weather-forecast > #forecast-weather-box .forecast-item:hover {
+    box-shadow: 0 6px 14px rgba(2,6,23,0.12);
+    transform: translateY(-2px);
+}
+
+.home-panels > .weather-forecast > #forecast-weather-box .forecast-item .forecast-icon {
+    vertical-align: middle;
+    margin-right: 8px;
+    width: 42px;
+    height: 42px;
+}
+
+.home-panels > .weather-forecast > #forecast-weather-box .forecast-temp {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: 600;
 }

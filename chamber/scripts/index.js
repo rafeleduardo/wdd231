@@ -121,8 +121,19 @@
             const desc = data && data.weather && data.weather[0] ? data.weather[0].description : '';
             const icon = data && data.weather && data.weather[0] ? data.weather[0].icon : '';
             const city = data && data.name ? data.name : 'Gothenburg';
-            const iconHtml = icon ? `<img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${desc}" width="48" height="48" style="vertical-align:middle;margin-right:8px;">` : '';
-            currentWeatherEl.innerHTML = `\n                <div><strong>${city}</strong></div>\n                <div style="margin-top:0.5rem;">${iconHtml}<span style="font-size:1.5rem;font-weight:600;">${temp}\u00b0C</span> \u2014 <span class="muted">${desc ? (desc.charAt(0).toUpperCase()+desc.slice(1)) : 'N/A'}</span></div>\n            `;
+            const tempMax = data && data.main && typeof data.main.temp_max !== 'undefined' ? Math.round(data.main.temp_max) : null;
+            const tempMin = data && data.main && typeof data.main.temp_min !== 'undefined' ? Math.round(data.main.temp_min) : null;
+            const humidity = data && data.main && typeof data.main.humidity !== 'undefined' ? data.main.humidity : null;
+            const sunrise = data && data.sys && data.sys.sunrise ? new Date(data.sys.sunrise * 1000) : null;
+            const sunset = data && data.sys && data.sys.sunset ? new Date(data.sys.sunset * 1000) : null;
+
+            const iconHtml = icon ? `<img class="cw-icon" src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${desc}">` : '';
+
+            const timeOptions = { hour: '2-digit', minute: '2-digit' };
+            const sunriseStr = sunrise ? sunrise.toLocaleTimeString(undefined, timeOptions) : 'N/A';
+            const sunsetStr = sunset ? sunset.toLocaleTimeString(undefined, timeOptions) : 'N/A';
+
+            currentWeatherEl.innerHTML = `\n                <div><strong>${city}</strong></div>\n                <div class="cw-main">${iconHtml}<div><span class=\"cw-temp\">${temp}\u00b0C</span> <div class=\"cw-desc muted\">${desc ? (desc.charAt(0).toUpperCase()+desc.slice(1)) : 'N/A'}</div></div></div>\n                <div class=\"cw-row\">\n                    <div class=\"cw-item\"><span class=\"muted\">High</span><span class=\"cw-value\">${tempMax !== null ? tempMax + '\u00b0' : 'N/A'}</span></div>\n                    <div class=\"cw-item\"><span class=\"muted\">Low</span><span class=\"cw-value\">${tempMin !== null ? tempMin + '\u00b0' : 'N/A'}</span></div>\n                    <div class=\"cw-item\"><span class=\"muted\">Humidity</span><span class=\"cw-value\">${humidity !== null ? humidity + '%' : 'N/A'}</span></div>\n                    <div class=\"cw-item\"><span class=\"muted\">Sunrise</span><span class=\"cw-value\">${sunriseStr}</span></div>\n                    <div class=\"cw-item\"><span class=\"muted\">Sunset</span><span class=\"cw-value\">${sunsetStr}</span></div>\n                </div>\n            `;
         }catch(e){
             currentWeatherEl.textContent = 'Unable to render current weather.';
             console.error(e);
@@ -140,20 +151,15 @@
 
         forecastWeatherEl.innerHTML = '';
         const listEl = document.createElement('div');
-        listEl.style.display = 'grid';
-        listEl.style.gridTemplateColumns = '1fr';
-        listEl.style.gap = '0.5rem';
+        listEl.className = 'forecast-list';
 
         nextDays.forEach(d=>{
             const dt = new Date(d.date + 'T12:00:00');
             const dayLabel = dt.toLocaleDateString(undefined,{weekday:'short', month:'short', day:'numeric'});
-            const iconHtml = d.icon ? `<img src="https://openweathermap.org/img/wn/${d.icon}@2x.png" alt="${d.desc}" width="42" height="42" style="vertical-align:middle;margin-right:8px;">` : '';
+            const iconHtml = d.icon ? `<img class="forecast-icon" src="https://openweathermap.org/img/wn/${d.icon}@2x.png" alt="${d.desc}">` : '';
             const item = document.createElement('div');
-            item.style.padding = '0.5rem';
-            item.style.background = 'var(--color-surface)';
-            item.style.borderRadius = '6px';
-            item.style.boxShadow = 'var(--shadow-1)';
-            item.innerHTML = `<strong>${dayLabel}</strong><div class="muted">${iconHtml}${d.desc.charAt(0).toUpperCase()+d.desc.slice(1)} \u2014 High ${d.high}\u00b0 \u2022 Low ${d.low}\u00b0</div>`;
+            item.className = 'forecast-item';
+            item.innerHTML = `<strong>${dayLabel}</strong><div class="muted">${iconHtml}${d.desc.charAt(0).toUpperCase()+d.desc.slice(1)}</div><div class="forecast-temp">High ${d.high}\u00b0 \u2022 Low ${d.low}\u00b0</div>`;
             listEl.appendChild(item);
         });
 
