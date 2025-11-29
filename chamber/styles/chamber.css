@@ -32,6 +32,13 @@ body {
     box-sizing: border-box;
 }
 
+/* Directory header layout extracted from inline styles */
+.directory-header .header-box {
+    max-width: var(--container-width);
+    margin: 0.5rem auto;
+    padding: 0 1rem;
+}
+
 * {
     box-sizing: border-box;
 }

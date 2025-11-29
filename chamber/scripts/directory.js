@@ -23,34 +23,17 @@
         }
     }
 
-    function makeImage(src, alt){
-        return function(opts={w:32,h:32}){
-            const img = document.createElement('img');
-            img.src = `images/${src}`;
-            img.alt = alt || '';
-            img.loading = opts.loading || 'lazy';
-            if(opts.fetchpriority){
-                try{ img.setAttribute('fetchpriority', opts.fetchpriority); }catch(e){}
-            }
-            img.width = opts.w;
-            img.height = opts.h;
-            img.style.objectFit = 'contain';
-
-            const placehold = (w,h) => `https://placehold.co/${w}x${h}/0A5873/FFFFFF?text=Logo`;
-
-            img.addEventListener('error', ()=>{
-                const w = opts.w || 32;
-                const h = opts.h || 32;
-                const p1 = placehold(w,h);
-                const p2 = placehold(w*2,h*2);
-                try{ img.setAttribute('fetchpriority','high'); }catch(e){}
-                img.loading = 'eager';
-                img.src = p1;
-                img.srcset = `${p1} 1x, ${p2} 2x`;
-            });
-
-            return img;
-        };
+    // Simplified image creation without dynamic preloads or placeholder fallbacks
+    function createImage(src, alt, width, height, options={}){
+        const img = new Image(width, height);
+        img.src = `images/${src}`;
+        img.alt = alt || '';
+        img.loading = options.loading || 'lazy';
+        img.decoding = 'async';
+        if(options.fetchpriority){
+            try { img.setAttribute('fetchpriority', options.fetchpriority); } catch(e) {}
+        }
+        return img;
     }
 
     function createCard(member, isFirst=false){
@@ -59,29 +42,13 @@
 
         const media = document.createElement('div');
         media.className = 'card-media';
-        const imgOpts = {w:600,h:350};
-        if(isFirst){
-            imgOpts.loading = 'eager';
-            imgOpts.fetchpriority = 'high';
-
-            try{
-                const preloadUrl = `images/${member.image}`;
-                if(!document.querySelector(`link[rel="preload"][href="${preloadUrl}"]`)){
-                    const l = document.createElement('link');
-                    l.rel = 'preload'; l.as = 'image'; l.href = preloadUrl;
-                    document.head.appendChild(l);
-                }
-                const p1 = `https://placehold.co/${imgOpts.w}x${imgOpts.h}/0A5873/FFFFFF?text=Logo`;
-                const p2 = `https://placehold.co/${imgOpts.w*2}x${imgOpts.h*2}/0A5873/FFFFFF?text=Logo`;
-                if(!document.querySelector(`link[rel="preload"][href="${p1}"]`)){
-                    const lp1 = document.createElement('link'); lp1.rel='preload'; lp1.as='image'; lp1.href=p1; document.head.appendChild(lp1);
-                }
-                if(!document.querySelector(`link[rel="preload"][href="${p2}"]`)){
-                    const lp2 = document.createElement('link'); lp2.rel='preload'; lp2.as='image'; lp2.href=p2; document.head.appendChild(lp2);
-                }
-            }catch(e){/* silent */}
-        }
-        const img = makeImage(member.image, member.name)(imgOpts);
+        const img = createImage(
+            member.image,
+            member.name,
+            760,
+            440,
+            isFirst ? { loading: 'eager', fetchpriority: 'high' } : { loading: 'lazy' }
+        );
         media.appendChild(img);
 
         const body = document.createElement('div');
@@ -124,14 +91,13 @@
 
         const media = document.createElement('div');
         media.className = 'list-media';
-        const imgOpts = {w:64,h:64};
-        if(isFirst){ imgOpts.loading='eager'; imgOpts.fetchpriority='high';
-            const preloadUrl = `images/${member.image}`;
-            if(!document.querySelector(`link[rel="preload"][href="${preloadUrl}"]`)){
-                const l = document.createElement('link'); l.rel='preload'; l.as='image'; l.href=preloadUrl; document.head.appendChild(l);
-            }
-        }
-        const img = makeImage(member.image, member.name)(imgOpts);
+        const img = createImage(
+            member.image,
+            member.name,
+            64,
+            64,
+            isFirst ? { loading: 'eager', fetchpriority: 'high' } : { loading: 'lazy' }
+        );
         media.appendChild(img);
 
         const body = document.createElement('div');
