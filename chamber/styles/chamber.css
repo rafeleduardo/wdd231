@@ -6,7 +6,7 @@
     --color-bg: #F8FAFC; /* page background (kept light) */
     --color-surface: #FFFFFF;
     --color-text: #0F172A; /* main text */
-    --color-muted: #64748B;
+    --color-muted: #5A6B7D; /* darker for WCAG AA compliance */
     --container-width: 1200px;
     --radius: 8px;
     --shadow-1: 0 1px 2px rgba(2, 6, 23, 0.06);
@@ -67,7 +67,6 @@ header img.logo {
 
 header h1 {
     margin: 0;
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-weight: 600;
     font-size: 1.25rem;
     line-height: 1;
@@ -76,7 +75,7 @@ header h1 {
 nav a {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
-    font-weight: 600
+    font-weight: 600;
 }
 
 /* Brand link and site title styles */
@@ -98,7 +97,7 @@ nav a {
 
 .brand-text h1 {
     margin: 0;
-    font-size: 1.125rem
+    font-size: 1.125rem;
 }
 
 .nav-group {
@@ -148,11 +147,6 @@ nav a {
     justify-content: space-between;
     gap: 1rem;
     padding: 0 1rem;
-}
-
-footer {
-    padding-left: 0;
-    padding-right: 0;
 }
 
 .nav-toggle {
@@ -287,7 +281,7 @@ footer {
     }
 
     .main-nav a:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.15);
     }
 
     .main-nav a.active {
@@ -536,8 +530,8 @@ main > * {
 
 .member-card .member-category {
     margin: 0 0 0.5rem 0;
-    color: var(--color-muted);
-    font-size: 0.9rem
+    color: #5A6B7D;
+    font-size: 0.9rem;
 }
 
 .member-card .member-desc {
@@ -635,34 +629,39 @@ main > * {
 }
 
 .footer-meta {
-    min-width: 260px
+    min-width: 260px;
+    text-align: right;
 }
 
 @media (max-width: 1200px) {
     .footer-meta {
-        min-width: 200px
+        min-width: 200px;
     }
 }
 
 .footer-col h4 {
-    margin: 0 0 0.5rem 0
+    margin: 0 0 0.5rem 0;
 }
 
 .footer-org address {
     font-style: normal;
-    line-height: 1.5
+    line-height: 1.5;
 }
 
 .footer-social {
     display: flex;
     flex-direction: column;
-    align-items: center
+    align-items: center;
+}
+
+.footer-social h4 {
+    margin-bottom: 0.9rem;
 }
 
 .social-icons {
     display: flex;
     gap: 1rem;
-    align-items: center
+    align-items: center;
 }
 
 .social-icons img {
@@ -680,15 +679,6 @@ main > * {
     height: 40px;
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.03);
-}
-
-.footer-social h4 {
-    margin-bottom: 0.9rem;
-}
-
-/* Footer meta information styles */
-.footer-meta {
-    text-align: right
 }
 
 .muted {
@@ -710,11 +700,7 @@ footer .muted, footer .muted a {
 }
 
 .social-icons a {
-    display: inline-block
-}
-
-.footer-social h4 {
-    margin-bottom: 0.6rem;
+    display: inline-block;
 }
 
 .social-icons img {
@@ -730,7 +716,7 @@ footer .muted, footer .muted a {
 .social-icons a:focus {
     outline: 3px solid rgba(255, 255, 255, 0.12);
     outline-offset: 4px;
-    border-radius: 6px
+    border-radius: 6px;
 }
 
 .brand-text .site-title,
@@ -781,7 +767,7 @@ footer .muted, footer .muted a {
 /* Title band: small stripe at the top of each panel */
 .home-panels .panel-title {
     background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-highlight) 100%);
-    color: #fff;
+    color: #000;
     padding: 0.65rem 1rem;
     box-sizing: border-box;
 }
@@ -865,9 +851,10 @@ footer .muted, footer .muted a {
 }
 
 /* Keep headings inside band tidy */
-.home-panels .panel-title h3,
-.home-panels .panel-title h4 {
+.home-panels .panel-title h2,
+.home-panels .panel-title h3 {
     margin: 0;
+    font-size: 1.125rem;
 }
 
 .home-panels .panel-title {
@@ -922,10 +909,10 @@ footer .muted, footer .muted a {
     right: 1.5rem;
     background: var(--color-accent);
     border-color: var(--color-accent);
-    color: #fff;
+    color: #000;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     box-shadow: 0 8px 16px rgba(248, 138, 59, 0.35);
     z-index: 10;
 }
@@ -933,6 +920,7 @@ footer .muted, footer .muted a {
 .home-hero .hero-cta:hover {
     background: var(--color-primary);
     border-color: var(--color-primary);
+    color: #fff;
     box-shadow: 0 12px 24px rgba(10, 88, 115, 0.45);
     transform: translateY(-3px);
 }
