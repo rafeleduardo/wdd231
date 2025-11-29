@@ -4,6 +4,7 @@
     const btnCards = document.getElementById('view-cards');
     const btnList = document.getElementById('view-list');
     const searchInput = document.getElementById('directory-search');
+    const clearBtn = document.getElementById('directory-clear');
 
     let members = [];
     let currentView = 'cards'; // default
@@ -23,7 +24,6 @@
         }
     }
 
-    // Simplified image creation without dynamic preloads or placeholder fallbacks
     function createImage(src, alt, width, height, options={}){
         const img = new Image(width, height);
         img.src = `images/${src}`;
@@ -132,21 +132,36 @@
     }
 
     function render(filtered){
-        const frag = document.createDocumentFragment();
-        if(currentView === 'cards'){
-            const grid = document.createElement('div');
-            grid.className = 'cards-grid';
-            filtered.forEach((m,i) => grid.appendChild(createCard(m, i===0)));
-            frag.appendChild(grid);
+        const heading = listingsEl.querySelector('h2');
+        if(!filtered || filtered.length === 0){
+            const empty = document.createElement('div');
+            empty.className = 'empty-state';
+            empty.setAttribute('role','status');
+            empty.textContent = 'No results. Try another term or category.';
+            if(heading){
+                listingsEl.replaceChildren(heading, empty);
+            } else {
+                listingsEl.replaceChildren(empty);
+            }
         } else {
-            const list = document.createElement('div');
-            list.className = 'list-wrap';
-            filtered.forEach((m,i) => list.appendChild(createListItem(m, i===0)));
-            frag.appendChild(list);
+            const frag = document.createDocumentFragment();
+            if(currentView === 'cards'){
+                const grid = document.createElement('div');
+                grid.className = 'cards-grid';
+                filtered.forEach((m,i) => grid.appendChild(createCard(m, i===0)));
+                frag.appendChild(grid);
+            } else {
+                const list = document.createElement('div');
+                list.className = 'list-wrap';
+                filtered.forEach((m,i) => list.appendChild(createListItem(m, i===0)));
+                frag.appendChild(list);
+            }
+            if(heading){
+                listingsEl.replaceChildren(heading, frag);
+            } else {
+                listingsEl.replaceChildren(frag);
+            }
         }
-
-        listingsEl.innerHTML = '';
-        listingsEl.appendChild(frag);
 
         listingsEl.classList.remove('loading');
         listingsEl.removeAttribute('aria-busy');
@@ -210,6 +225,12 @@
 
     searchInput.addEventListener('input', ()=>{
         render(applySearch());
+    });
+
+    clearBtn?.addEventListener('click', ()=>{
+        searchInput.value = '';
+        searchInput.focus();
+        render(members.slice());
     });
 
     // init

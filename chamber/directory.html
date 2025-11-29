@@ -62,7 +62,6 @@
 </header>
 
 <main>
-    <!-- Directory page title (creative, not descriptive of actions) -->
     <section class="directory-header">
         <div class="header-box">
             <h2 class="directory-title">Harborview Business Showcase</h2>
@@ -77,12 +76,15 @@
                 <button id="view-list" class="btn btn-toggle" role="tab" aria-selected="false" aria-controls="directory-listings" tabindex="-1" aria-label="List view">List</button>
             </div>
             <div class="directory-search">
-                <input id="directory-search" type="search" placeholder="Search members by name or category" aria-label="Search directory">
+                <input id="directory-search" type="search" placeholder="Search by name or category" aria-label="Search directory">
+                <button id="directory-clear" class="btn btn-clear" type="button" aria-label="Clear search">Clear</button>
             </div>
         </div>
     </section>
 
-    <section id="directory-listings" class="directory-cards loading" aria-live="polite" aria-busy="true"></section>
+    <section id="directory-listings" class="directory-cards loading" aria-live="polite" aria-busy="true">
+        <h2 class="visually-hidden">Business listings</h2>
+    </section>
 </main>
 
 <footer>
