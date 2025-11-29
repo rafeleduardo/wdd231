@@ -26,11 +26,11 @@
         const media = document.createElement('div');
         media.className = 'card-media';
         const img = document.createElement('img');
-        // use placehold.co if local image not present
-        img.src = `https://placehold.co/600x350/0A5873/FFFFFF?text=${encodeURIComponent(member.name)}`;
-        img.alt = member.name;
+        img.src = member.image ? `images/${member.image}` : `https://placehold.co/600x350/0A5873/FFFFFF?text=${encodeURIComponent(member.name)}`;
+        img.alt = `${member.name} photo`;
         img.loading = 'lazy';
-        img.width = 600; img.height = 350;
+        img.width = 760;
+        img.height = 440;
         media.appendChild(img);
 
         const body = document.createElement('div');
