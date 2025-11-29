@@ -1118,3 +1118,313 @@ footer .muted, footer .muted a {
     margin-top: 0.5rem;
     font-weight: 600;
 }
+
+/* Join Page Layout */
+.join-main {
+    padding: 1rem;
+}
+
+.join-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+/* Join Form Styles */
+.join-form-section {
+    background: var(--color-surface);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-1);
+}
+
+.join-form-section h2 {
+    margin-top: 0;
+    font-size: 1.75rem;
+    color: var(--color-primary);
+}
+
+.join-form fieldset {
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.join-form legend {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    padding: 0 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.form-group label > input,
+.form-group label > select,
+.form-group label > textarea {
+    margin-top: 0.5rem;
+}
+
+.join-form input[type="text"],
+.join-form input[type="email"],
+.join-form input[type="tel"],
+.join-form select,
+.join-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid rgba(15, 23, 42, 0.15);
+    border-radius: var(--radius);
+    background-color: #F8FAFC;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.join-form input:focus,
+.join-form select:focus,
+.join-form textarea:focus {
+    outline: none;
+    border-color: var(--color-primary-600);
+    box-shadow: 0 0 0 3px rgba(37, 165, 224, 0.18);
+}
+
+.join-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Form Validation Styles */
+.was-validated input:invalid,
+.was-validated select:invalid,
+.was-validated textarea:invalid {
+    border-color: #dc3545; /* Red for error */
+}
+
+.was-validated input:invalid:focus,
+.was-validated select:invalid:focus,
+.was-validated textarea:invalid:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+}
+
+
+.btn-submit {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #000;
+}
+
+.btn-submit:hover {
+    background-color: #e07a2b; /* A slightly darker orange */
+    border-color: #e07a2b;
+}
+
+/* Membership Levels Aside */
+.membership-levels {
+    padding-top: 1rem;
+}
+
+.membership-levels h3 {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.level-card {
+    background: var(--color-surface);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-1);
+    border-left: 5px solid var(--color-highlight);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: card-fade-in 0.5s ease-out forwards;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.level-card:nth-child(2) { animation-delay: 0.1s; }
+.level-card:nth-child(3) { animation-delay: 0.2s; }
+.level-card:nth-child(4) { animation-delay: 0.3s; }
+.level-card:nth-child(5) { animation-delay: 0.4s; }
+
+
+@keyframes card-fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.level-card h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+    color: var(--color-primary);
+}
+
+.btn-details {
+    background-color: var(--color-primary-600);
+    color: white;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: var(--color-surface);
+    padding: 2rem;
+    border-radius: var(--radius);
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease-out;
+}
+
+.modal.is-open .modal-content {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-muted);
+}
+
+.modal-content h4 {
+    margin-top: 0;
+    color: var(--color-primary);
+}
+
+.modal-content .price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin: 0 0 1rem 0;
+}
+
+.modal-content p {
+    margin: 0 0 1rem 0;
+    line-height: 1.6;
+    color: var(--color-muted);
+}
+
+.modal-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal-content li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-content li:last-child {
+    border-bottom: none;
+}
+
+/* Thank You Page Styles */
+.thankyou-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.thankyou-content {
+    max-width: 600px;
+}
+
+.form-summary-box {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 2rem 0;
+    text-align: left;
+    box-shadow: var(--shadow-1);
+    border-left: 5px solid var(--color-primary);
+}
+
+.form-summary-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form-summary-box li {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.form-summary-box li strong {
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .join-content {
+        grid-template-columns: 1fr;
+    }
+
+    .membership-levels {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .join-form-section {
+        padding: 1.5rem;
+    }
+}
