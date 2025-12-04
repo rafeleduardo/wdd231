@@ -1,34 +1,28 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Harborview Chamber of Commerce - Directory</title>
-    <meta name="description" content="Directory - Harborview Chamber of Commerce — Where local businesses thrive.">
+    <title>Discover Harborview - Chamber of Commerce</title>
+    <meta name="description" content="Discover the best attractions and places of interest in Harborview.">
     <meta name="author" content="Rafael Parra">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="Harborview Chamber of Commerce - Directory">
-    <meta property="og:description" content="Directory of Harborview Chamber of Commerce members and local businesses — Where local businesses thrive.">
-    <meta property="og:image" content="https://rafeleduardo.github.io/wdd231/chamber/images/chamber-logo.webp">
-    <meta property="og:url" content="https://rafeleduardo.github.io/wdd231/chamber/directory.html">
-    <meta property="og:type" content="website">
 
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <!-- Preconnect & preload Google Fonts -->
+    <!-- Fonts & CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" onload="this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <link rel="preload" as="style" href="styles/chamber.css" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="styles/chamber.css"></noscript>
+    <link rel="preload" href="styles/chamber.css" as="style">
+    <link rel="stylesheet" href="styles/chamber.css">
+    <link rel="preload" href="styles/medium.css" as="style" media="(min-width: 641px)">
+    <link rel="stylesheet" href="styles/medium.css" media="(min-width: 641px)">
 
     <script src="scripts/navigation.js" defer></script>
+    <script src="scripts/discover.js" type="module" defer></script>
     <script src="../scripts/date.js" defer></script>
-    <script src="scripts/directory.js" defer></script>
 </head>
 <body>
 
@@ -53,8 +47,8 @@
                 <nav id="primary-navigation" class="main-nav" aria-label="Primary navigation">
                     <ul>
                         <li><a href="./index.html">Home</a></li>
-                        <li><a href="./discover.html">Discover</a></li>
-                        <li><a href="./directory.html" class="active">Business Directory</a></li>
+                        <li><a href="./discover.html" class="active">Discover</a></li>
+                        <li><a href="./directory.html">Business Directory</a></li>
                         <li><a href="./join.html">Join</a></li>
                     </ul>
                     <div class="nav-underline" aria-hidden="true"></div>
@@ -64,29 +58,44 @@
     </div>
 </header>
 
-<main>
-    <section class="directory-header">
-        <div class="header-box">
-            <h2 class="directory-title">Harborview Business Showcase</h2>
-            <p class="directory-subtitle muted">Local stories. Real connections.</p>
+<main class="discover-main">
+    <!-- Visitor Message Area -->
+    <div id="visitor-message" class="visitor-banner" style="display: none;">
+        <div class="visitor-content">
+            <p id="visitor-text"></p>
+            <button id="close-visitor-message" class="btn-close-banner" aria-label="Close message">&times;</button>
         </div>
-    </section>
+    </div>
 
-    <section class="directory-controls" aria-label="Directory controls">
-        <div class="controls-inner">
-            <div class="view-toggle" role="tablist" aria-label="View toggle">
-                <button id="view-cards" class="btn btn-toggle active" role="tab" aria-selected="true" aria-controls="directory-listings" tabindex="0" aria-label="Cards view">Cards</button>
-                <button id="view-list" class="btn btn-toggle" role="tab" aria-selected="false" aria-controls="directory-listings" tabindex="-1" aria-label="List view">List</button>
-            </div>
-            <div class="directory-search">
-                <input id="directory-search" type="search" placeholder="Search by name or category" aria-label="Search directory">
-                <button id="directory-clear" class="btn btn-clear" type="button" aria-label="Clear search">Clear</button>
+    <div class="discover-header">
+        <h2>Discover Harborview</h2>
+        <p class="discover-subtitle">Explore the best attractions and places of interest in our community</p>
+    </div>
+
+    <!-- Attractions Grid -->
+    <section class="attractions-section">
+        <div id="attractions-grid" class="attractions-grid" aria-live="polite">
+            <article class="attraction-card" style="grid-area: card1;">
+                <figure class="attraction-figure">
+                    <img src="images/harborview-maritime-museum-320.webp" alt="Harborview Maritime Museum" width="300" height="200" fetchpriority="high">
+                </figure>
+                <div class="attraction-body">
+                    <h2>Harborview Maritime Museum</h2>
+                    <address>450 Waterfront Drive, Harborview, ST 12345</address>
+                    <p>Explore the rich maritime history of Harborview through interactive exhibits, historic vessels, and nautical artifacts spanning three centuries of seafaring tradition.</p>
+                    <button class="btn btn-learn-more">Learn More</button>
+                </div>
+            </article>
+            <div id="attractions-skeleton">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
             </div>
         </div>
-    </section>
-
-    <section id="directory-listings" class="directory-cards loading" aria-live="polite" aria-busy="true">
-        <h2 class="visually-hidden">Business listings</h2>
     </section>
 </main>
 
@@ -103,7 +112,7 @@
         </div>
 
         <div class="footer-col footer-social">
-            <h4>Follow us</h4>
+            <h3>Follow us</h3>
             <div class="social-icons">
                 <a href="#" aria-label="YouTube"><span class="social-icon"><img src="images/yt_icon_red_digital-32.webp" alt="YouTube" width="32" height="32"></span></a>
                 <a href="#" aria-label="X"><span class="social-icon"><img src="images/logo-x-white-32.webp" alt="X" width="32" height="32"></span></a>
