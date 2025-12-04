@@ -55,7 +55,8 @@ function displayAttractions() {
                      width="300" 
                      height="200" 
                      loading="lazy"
-                     decoding="async">
+                     decoding="async"
+                     fetchpriority="high">
             </figure>
             <div class="attraction-body">
                 <h2>${attraction.name}</h2>
@@ -71,6 +72,11 @@ function displayAttractions() {
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', () => {
+    const firstCard = document.querySelector('[data-card-number="1"]');
+    if (firstCard) {
+        firstCard.style.gridArea = 'card1';
+    }
+
     displayVisitorMessage();
     displayAttractions();
 });

@@ -4,7 +4,7 @@
         name: "Harborview Maritime Museum",
         address: "450 Waterfront Drive, Harborview, ST 12345",
         description: "Explore the rich maritime history of Harborview through interactive exhibits, historic vessels, and nautical artifacts spanning three centuries of seafaring tradition.",
-        image: "images/harborview-maritime-museum-320.webp",
+        image: "images/harborview-museum-320.webp",
         category: "Museum"
     },
     {
