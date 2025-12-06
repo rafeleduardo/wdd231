@@ -101,10 +101,8 @@ function shuffleArray(arr) {
     return a;
 }
 
-function pickTopRecipes(recipes, count = 2, poolSize = 8) {
-    // Exclude recipe with id:1 (Empanadas Argentinas) as it's already in HTML
-    const filtered = recipes.filter(recipe => recipe.id !== 1);
-    const sorted = filtered.slice().sort((a, b) => (b.likes + b.views) - (a.likes + a.views));
+function pickTopRecipes(recipes, count = 3, poolSize = 8) {
+    const sorted = recipes.slice().sort((a, b) => (b.likes + b.views) - (a.likes + a.views));
     const pool = sorted.slice(0, poolSize);
     const shuffled = shuffleArray(pool);
     return shuffled.slice(0, count);
@@ -157,6 +155,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     updateFooterDate();
     initHamburgerMenu();
     const recipes = await fetchRecipes();
-    const spotlights = pickTopRecipes(recipes, 2, 8);
+    const spotlights = pickTopRecipes(recipes, 3, 8);
     renderRecipeSpotlights(spotlights);
 });

@@ -1,6 +1,4 @@
-﻿document.addEventListener('DOMContentLoaded', addRecipesPageHandlers);
-
-function addRecipesPageHandlers() {
+﻿function addRecipesPageHandlers() {
     // Layout controls
     const layoutButtons = document.querySelectorAll('.layout-button');
     layoutButtons.forEach(button => {
@@ -253,6 +251,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Update footer date
     if (typeof updateFooterDate === 'function') {
         updateFooterDate();
+    }
+
+    // Initialize hamburger menu
+    if (typeof initHamburgerMenu === 'function') {
+        initHamburgerMenu();
     }
 
     addRecipesPageHandlers();

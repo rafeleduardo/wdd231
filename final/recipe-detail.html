@@ -15,12 +15,14 @@
     <meta property="og:type" content="website">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <!-- Fonts & CSS -->
+    <!-- Load CSS synchronously to prevent CLS -->
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- Fonts with optional display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=optional" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=optional"></noscript>
 
     <script src="scripts/index.js" defer></script>
     <script src="scripts/recipe-detail.js" defer></script>

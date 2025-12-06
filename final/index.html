@@ -16,8 +16,6 @@
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <!-- Preload LCP image -->
-    <link rel="preload" as="image" href="images/recipes/empanadas-argentinas-320.webp" fetchpriority="high">
 
     <!-- Load CSS synchronously to prevent CLS -->
     <link rel="stylesheet" href="styles/styles.css">
@@ -83,31 +81,8 @@
         <section class="popular-recipes">
             <h2 class="section-title">Most Popular Recipes</h2>
             <div id="recipe-spotlights" class="recipe-cards">
-                <!-- First card with LCP image for immediate discovery -->
-                <article class="recipe-card" id="lcp-card">
-                    <div class="recipe-thumbnail">
-                        <img
-                            src="images/recipes/empanadas-argentinas-320.webp"
-                            alt="Empanadas Argentinas"
-                            width="320"
-                            height="240"
-                            fetchpriority="high"
-                            class="recipe-image"
-                            decoding="async"
-                        >
-                    </div>
-                    <div class="recipe-content">
-                        <h3 class="recipe-title">Empanadas Argentinas</h3>
-                        <p class="recipe-description">Crispy pastries filled with seasoned beef, onions, and spices. A classic from Argentina.</p>
-                        <div class="recipe-meta">
-                            <span class="recipe-author">By Maria Rodriguez</span>
-                            <span class="recipe-views">2400 views</span>
-                            <span class="recipe-likes">&#10084; 156</span>
-                        </div>
-                        <a href="recipe-detail.html?id=1" class="view-details">View Details</a>
-                    </div>
-                </article>
                 <!-- Skeleton loaders to prevent CLS -->
+                <div class="skeleton-card"></div>
                 <div class="skeleton-card"></div>
                 <div class="skeleton-card"></div>
             </div>
