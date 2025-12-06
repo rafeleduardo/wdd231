@@ -1,4 +1,58 @@
 ﻿// Funciones utilitarias globales para Sabor de Casa
+
+// Update footer date automatically
+function updateFooterDate() {
+    const lastUpdateElement = document.getElementById('lastUpdate');
+    if (lastUpdateElement) {
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = now.toLocaleDateString('en-US', options);
+        lastUpdateElement.textContent = formattedDate;
+    }
+}
+
+// Hamburger menu toggle
+function initHamburgerMenu() {
+    const hamburger = document.getElementById('hamburgerMenu');
+    const navigation = document.getElementById('navigation');
+    const overlay = document.getElementById('navOverlay');
+
+    if (!hamburger || !navigation || !overlay) return;
+
+    function toggleMenu() {
+        hamburger.classList.toggle('active');
+        navigation.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.style.overflow = navigation.classList.contains('active') ? 'hidden' : '';
+    }
+
+    function closeMenu() {
+        hamburger.classList.remove('active');
+        navigation.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Toggle menu on hamburger click
+    hamburger.addEventListener('click', toggleMenu);
+
+    // Close menu on overlay click
+    overlay.addEventListener('click', closeMenu);
+
+    // Close menu on nav link click
+    const navLinks = navigation.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // Close menu on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navigation.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+}
+
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
@@ -77,9 +131,26 @@ function renderRecipeSpotlights(recipes) {
     recipes.forEach(recipe => {
         const card = document.createElement('article');
         card.className = 'recipe-card';
+
+        // Generate responsive image HTML
+        const imageHTML = recipe.image 
+            ? `<img 
+                srcset="
+                    images/recipes/${recipe.image}-400.webp 400w,
+                    images/recipes/${recipe.image}-800.webp 800w,
+                    images/recipes/${recipe.image}-1200.webp 1200w
+                "
+                sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
+                src="images/recipes/${recipe.image}-800.webp"
+                alt="${recipe.title}"
+                loading="lazy"
+                class="recipe-image"
+              >`
+            : `<div class="thumbnail-placeholder">${recipe.title}</div>`;
+
         card.innerHTML = `
             <div class="recipe-thumbnail">
-                <div class="thumbnail-placeholder">${recipe.title}</div>
+                ${imageHTML}
             </div>
             <div class="recipe-content">
                 <h3 class="recipe-title">${recipe.title}</h3>
@@ -97,6 +168,12 @@ function renderRecipeSpotlights(recipes) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // Update footer date on all pages
+    updateFooterDate();
+
+    // Initialize hamburger menu
+    initHamburgerMenu();
+
     addHomePageHandlers();
     const recipes = await fetchRecipes();
     const spotlights = pickTopRecipes(recipes, 3, 8);

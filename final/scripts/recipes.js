@@ -191,9 +191,26 @@ function renderRecipeCards(recipes) {
         card.setAttribute('data-cuisine', recipe.cuisine);
         card.setAttribute('data-difficulty', recipe.difficulty);
         card.setAttribute('data-time', recipe.time);
+
+        // Generate responsive image HTML
+        const imageHTML = recipe.image 
+            ? `<img 
+                srcset="
+                    images/recipes/${recipe.image}-400.webp 400w,
+                    images/recipes/${recipe.image}-800.webp 800w,
+                    images/recipes/${recipe.image}-1200.webp 1200w
+                "
+                sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
+                src="images/recipes/${recipe.image}-800.webp"
+                alt="${recipe.title}"
+                loading="lazy"
+                class="recipe-image"
+              >`
+            : `<div class="thumbnail-placeholder">${recipe.title}</div>`;
+
         card.innerHTML = `
             <div class="recipe-thumbnail">
-                <div class="thumbnail-placeholder">${recipe.title}</div>
+                ${imageHTML}
             </div>
             <div class="recipe-content">
                 <h3 class="recipe-title">${recipe.title}</h3>
@@ -229,6 +246,11 @@ async function renderCuisineFilters() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // Update footer date
+    if (typeof updateFooterDate === 'function') {
+        updateFooterDate();
+    }
+
     addRecipesPageHandlers();
     await renderCuisineFilters();
     const recipes = await fetchRecipes();
