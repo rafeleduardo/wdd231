@@ -15,14 +15,27 @@
     <meta property="og:type" content="website">
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="preload" as="style" href="styles/styles.css" onload="this.rel='stylesheet'">
+
+    <!-- Preload LCP image -->
+    <link rel="preload" as="image" href="images/recipes/empanadas-argentinas-320.webp" fetchpriority="high">
+
+    <!-- Load CSS synchronously to prevent CLS -->
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- Fonts with optional display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=optional" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=optional"></noscript>
+
+    <script src="scripts/index.js" defer></script>
 </head>
 <body>
 <!-- Header Section -->
 <header class="header">
     <div class="container">
         <div class="logo">
-            <img src="images/sabor-de-casa-logo.webp" alt="Sabor de Casa" class="logo-image" fetchpriority="high">
+            <img src="images/sabor-de-casa-logo-80.webp" alt="Sabor de Casa" class="logo-image" width="40" height="40" fetchpriority="high">
             <h1>Sabor de Casa</h1>
         </div>
         <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle navigation menu">
@@ -69,7 +82,35 @@
         <!-- Popular Recipes Section -->
         <section class="popular-recipes">
             <h2 class="section-title">Most Popular Recipes</h2>
-            <div id="recipe-spotlights" class="recipe-cards"></div>
+            <div id="recipe-spotlights" class="recipe-cards">
+                <!-- First card with LCP image for immediate discovery -->
+                <article class="recipe-card" id="lcp-card">
+                    <div class="recipe-thumbnail">
+                        <img
+                            src="images/recipes/empanadas-argentinas-320.webp"
+                            alt="Empanadas Argentinas"
+                            width="320"
+                            height="240"
+                            fetchpriority="high"
+                            class="recipe-image"
+                            decoding="async"
+                        >
+                    </div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">Empanadas Argentinas</h3>
+                        <p class="recipe-description">Crispy pastries filled with seasoned beef, onions, and spices. A classic from Argentina.</p>
+                        <div class="recipe-meta">
+                            <span class="recipe-author">By Maria Rodriguez</span>
+                            <span class="recipe-views">2400 views</span>
+                            <span class="recipe-likes">&#10084; 156</span>
+                        </div>
+                        <a href="recipe-detail.html?id=1" class="view-details">View Details</a>
+                    </div>
+                </article>
+                <!-- Skeleton loaders to prevent CLS -->
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
         </section>
     </div>
 </main>
@@ -88,6 +129,5 @@
     </div>
 </footer>
 
-<script src="scripts/index.js"></script>
 </body>
 </html>

@@ -1,6 +1,4 @@
-﻿// Lógica exclusiva para recipes.html
-
-document.addEventListener('DOMContentLoaded', addRecipesPageHandlers);
+﻿document.addEventListener('DOMContentLoaded', addRecipesPageHandlers);
 
 function addRecipesPageHandlers() {
     // Layout controls
@@ -177,8 +175,13 @@ function renderRecipeCards(recipes) {
     const grid = document.getElementById('recipeGrid');
     const countEl = document.getElementById('recipeCount');
     if (!grid) return;
-    grid.innerHTML = '';
-    // Obtener el total de recetas desde el JSON original
+
+    const skeletons = grid.querySelectorAll('.skeleton-card');
+    skeletons.forEach(skeleton => skeleton.remove());
+
+    const existingCards = grid.querySelectorAll('.recipe-card');
+    existingCards.forEach(card => card.remove());
+
     fetchRecipes().then(allRecipes => {
         if (countEl) {
             countEl.textContent = `${recipes.length} of ${allRecipes.length} recipes`;
@@ -203,6 +206,8 @@ function renderRecipeCards(recipes) {
                 sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
                 src="images/recipes/${recipe.image}-800.webp"
                 alt="${recipe.title}"
+                width="800"
+                height="600"
                 loading="lazy"
                 class="recipe-image"
               >`
@@ -236,7 +241,6 @@ async function renderCuisineFilters() {
     if (!container) return;
     container.innerHTML = '';
     cuisines.forEach(cuisine => {
-        // Capitalizar la primera letra y mostrar el nombre
         const label = cuisine.charAt(0).toUpperCase() + cuisine.slice(1);
         const el = document.createElement('label');
         el.className = 'filter-option';

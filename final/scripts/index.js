@@ -1,13 +1,9 @@
-﻿// Funciones utilitarias globales para Sabor de Casa
-
-// Update footer date automatically
-function updateFooterDate() {
+﻿function updateFooterDate() {
     const lastUpdateElement = document.getElementById('lastUpdate');
     if (lastUpdateElement) {
         const now = new Date();
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedDate = now.toLocaleDateString('en-US', options);
-        lastUpdateElement.textContent = formattedDate;
+        lastUpdateElement.textContent = now.toLocaleDateString('en-US', options);
     }
 }
 
@@ -33,19 +29,15 @@ function initHamburgerMenu() {
         document.body.style.overflow = '';
     }
 
-    // Toggle menu on hamburger click
     hamburger.addEventListener('click', toggleMenu);
 
-    // Close menu on overlay click
     overlay.addEventListener('click', closeMenu);
 
-    // Close menu on nav link click
     const navLinks = navigation.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', closeMenu);
     });
 
-    // Close menu on ESC key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && navigation.classList.contains('active')) {
             closeMenu();
@@ -89,13 +81,6 @@ function showNotification(message, type = 'info') {
     }, 4000);
 }
 
-// Lógica exclusiva para index.html (home)
-function addHomePageHandlers() {
-    // Aquí puedes agregar lógica exclusiva para la home si es necesario
-    // Por ahora solo ejemplo de mensaje de bienvenida
-    console.log('Página principal cargada');
-}
-
 async function fetchRecipes() {
     try {
         const res = await fetch('data/recipes.json');
@@ -116,9 +101,10 @@ function shuffleArray(arr) {
     return a;
 }
 
-function pickTopRecipes(recipes, count = 3, poolSize = 8) {
-    // Combine likes and views for ranking
-    const sorted = recipes.slice().sort((a, b) => (b.likes + b.views) - (a.likes + a.views));
+function pickTopRecipes(recipes, count = 2, poolSize = 8) {
+    // Exclude recipe with id:1 (Empanadas Argentinas) as it's already in HTML
+    const filtered = recipes.filter(recipe => recipe.id !== 1);
+    const sorted = filtered.slice().sort((a, b) => (b.likes + b.views) - (a.likes + a.views));
     const pool = sorted.slice(0, poolSize);
     const shuffled = shuffleArray(pool);
     return shuffled.slice(0, count);
@@ -127,24 +113,24 @@ function pickTopRecipes(recipes, count = 3, poolSize = 8) {
 function renderRecipeSpotlights(recipes) {
     const container = document.getElementById('recipe-spotlights');
     if (!container) return;
-    container.innerHTML = '';
-    recipes.forEach(recipe => {
+
+    const skeletons = container.querySelectorAll('.skeleton-card');
+    skeletons.forEach(skeleton => skeleton.remove());
+
+    recipes.forEach((recipe, index) => {
         const card = document.createElement('article');
         card.className = 'recipe-card';
 
-        // Generate responsive image HTML
-        const imageHTML = recipe.image 
-            ? `<img 
-                srcset="
-                    images/recipes/${recipe.image}-400.webp 400w,
-                    images/recipes/${recipe.image}-800.webp 800w,
-                    images/recipes/${recipe.image}-1200.webp 1200w
-                "
-                sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
-                src="images/recipes/${recipe.image}-800.webp"
+        const isFirstImage = index === 0;
+        const imageHTML = recipe.image
+            ? `<img
+                src="images/recipes/${recipe.image}-320.webp"
                 alt="${recipe.title}"
-                loading="lazy"
+                width="320"
+                height="240"
+                ${isFirstImage ? 'fetchpriority="high"' : 'loading="lazy"'}
                 class="recipe-image"
+                decoding="async"
               >`
             : `<div class="thumbnail-placeholder">${recipe.title}</div>`;
 
@@ -168,14 +154,9 @@ function renderRecipeSpotlights(recipes) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Update footer date on all pages
     updateFooterDate();
-
-    // Initialize hamburger menu
     initHamburgerMenu();
-
-    addHomePageHandlers();
     const recipes = await fetchRecipes();
-    const spotlights = pickTopRecipes(recipes, 3, 8);
+    const spotlights = pickTopRecipes(recipes, 2, 8);
     renderRecipeSpotlights(spotlights);
 });
