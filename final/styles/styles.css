@@ -207,7 +207,7 @@ h1, h2, h3, h4, h5, h6 {
 .video-link {
     font-size: 14px;
     font-weight: 600;
-    color: var(--color-primary);
+    color: var(--color-primary-dark);
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 6px;
@@ -274,7 +274,7 @@ h1, h2, h3, h4, h5, h6 {
         padding: 16px 20px;
         font-size: 18px;
         border-radius: 8px;
-        border-bottom: 1px solid #F8F5F0;
+        border-bottom: 1px solid var(--color-background);
     }
 
     .nav-link.active::after {
@@ -282,7 +282,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .nav-link:hover {
-        background-color: #F8F5F0;
+        background-color: var(--color-background);
     }
 
     .nav-overlay {
