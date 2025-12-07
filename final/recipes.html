@@ -14,7 +14,16 @@
     <meta property="og:url" content="https://rafeleduardo.github.io/wdd231/final/index.html">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Google Fonts with preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" onload="this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Load CSS -->
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/recipes.css">
     <script src="scripts/recipes.js" defer></script>
 </head>
 <body>
@@ -23,7 +32,7 @@
     <div class="container">
         <div class="logo">
             <img src="images/sabor-de-casa-logo-40.webp" alt="Sabor de Casa" class="logo-image" width="40" height="40" fetchpriority="high">
-            <h1>Sabor de Casa</h1>
+            <span class="logo-text">Sabor de Casa</span>
         </div>
         <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle navigation menu">
             <span></span>
@@ -167,6 +176,9 @@
         <div class="footer-content">
             <div class="footer-info">
                 <p class="copyright">&copy; 2025 Sabor de Casa. All rights reserved.</p>
+            </div>
+            <div class="footer-video">
+                <a href="#" target="_blank" rel="noopener noreferrer" class="video-link">📹 Project Video</a>
             </div>
             <div class="footer-timestamp">
                 <p class="last-updated">Last updated: <span id="lastUpdate">December 4, 2025</span></p>

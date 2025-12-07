@@ -119,14 +119,13 @@ function renderRecipeSpotlights(recipes) {
         const card = document.createElement('article');
         card.className = 'recipe-card';
 
-        const isFirstImage = index === 0;
         const imageHTML = recipe.image
             ? `<img
                 src="images/recipes/${recipe.image}-320.webp"
                 alt="${recipe.title}"
                 width="320"
                 height="240"
-                ${isFirstImage ? 'fetchpriority="high"' : 'loading="lazy"'}
+                fetchpriority="high"
                 class="recipe-image"
                 decoding="async"
               >`
